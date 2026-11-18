@@ -1,0 +1,140 @@
+
+import java.util.HashMap;
+
+class Student {
+    private int studentID;
+    private String studentName;
+
+    // Constructor
+    public Student(int studentID, String studentName) {
+        this.studentID = studentID;
+        this.studentName = studentName;
+    }
+
+    // Getter for Student ID
+    public int getStudentID() {
+        return studentID;
+    }
+
+    // Getter for Student Name
+    public String getStudentName() {
+        return studentName;
+    }
+
+    // Setter for Student Name
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    // Display student information
+    @Override
+    public String toString() {
+        return studentID + "=" + studentName;
+    }
+}
+
+
+class StudentManager {
+
+    private HashMap<Integer, Student> students;
+
+    // Constructor
+    public StudentManager() {
+        students = new HashMap<>();
+    }
+
+    // Add a student
+    public void addStudent(int id, String name) {
+        students.put(id, new Student(id, name));
+    }
+
+    // Display all students
+    public void displayStudents() {
+        System.out.println(students);
+    }
+
+    // Display a specific student
+    public void displayStudent(int id) {
+        System.out.println(students.get(id));
+    }
+
+    // Update student name
+    public void updateStudent(int id, String newName) {
+        if (students.containsKey(id)) {
+            students.get(id).setStudentName(newName);
+        }
+    }
+
+    // Remove a student
+    public void removeStudent(int id) {
+        students.remove(id);
+    }
+
+    // Check if student ID exists
+    public boolean containsStudent(int id) {
+        return students.containsKey(id);
+    }
+
+    // Get total number of students
+    public int getTotalStudents() {
+        return students.size();
+    }
+
+    // Clear all students
+    public void clearStudents() {
+        students.clear();
+    }
+}
+
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Create StudentManager object
+        StudentManager manager = new StudentManager();
+
+        // ADD STUDENTS
+        manager.addStudent(1001, "Juan Dela Cruz");
+        manager.addStudent(1002, "Maria Santos");
+        manager.addStudent(1003, "Pedro Garcia");
+        manager.addStudent(1004, "Ana Reyes");
+        manager.addStudent(1004, "Ana Reyes");
+        manager.addStudent(1005, "John Lim");
+
+        // DISPLAY ALL STUDENTS
+        System.out.println("All Students:");
+        manager.displayStudents();
+
+        // DISPLAY A SPECIFIC STUDENT
+        System.out.println("\nStudent with ID 1002:");
+        manager.displayStudent(1002);
+
+        // UPDATE A STUDENT
+        manager.updateStudent(1003, "Pedro Ramirez");
+
+        System.out.println("\nAfter Updating Student ID 1003:");
+        manager.displayStudents();
+
+        // REMOVE A STUDENT
+        manager.removeStudent(1001);
+
+        System.out.println("\nAfter Removing Student ID 1001:");
+        manager.displayStudents();
+
+        // CHECK IF A KEY EXISTS
+        System.out.println("\nIs Student ID 1005 existing?");
+        System.out.println(manager.containsStudent(1005));
+
+        // DISPLAY NUMBER OF STUDENTS
+        System.out.println("\nTotal Students:");
+        System.out.println(manager.getTotalStudents());
+
+        // CLEAR ALL ELEMENTS
+        manager.clearStudents();
+
+        // DISPLAY ALL ELEMENTS
+        System.out.println("\nAfter Clearing All Students:");
+        manager.displayStudents();
+    }
+}
